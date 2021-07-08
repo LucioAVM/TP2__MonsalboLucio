@@ -1,0 +1,1191 @@
+eclipse.preferences.version=1
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/CPATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/CPATH/operation=remove
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/C_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/C_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/append=true
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/appendContributed=true
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/LIBRARY_PATH/delimiter=;
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/LIBRARY_PATH/operation=remove
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/append=true
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.mingw.exe.debug.848330291/appendContributed=true
+
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project>
+	<configuration id="cdt.managedbuild.config.gnu.mingw.exe.debug.848330291" name="Debug">
+		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
+			<provider copy-of="extension" id="org.eclipse.cdt.ui.UserLanguageSettingsProvider"/>
+			<provider-reference id="org.eclipse.cdt.core.ReferencedProjectsLanguageSettingsProvider" ref="shared-provider"/>
+			<provider-reference id="org.eclipse.cdt.managedbuilder.core.MBSLanguageSettingsProvider" ref="shared-provider"/>
+			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="766132112434618236" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot;" prefer-non-shared="true">
+				<language-scope id="org.eclipse.cdt.core.gcc"/>
+				<language-scope id="org.eclipse.cdt.core.g++"/>
+			</provider>
+		</extension>
+	</configuration>
+	<configuration id="cdt.managedbuild.config.gnu.mingw.exe.release.1381227836" name="Release">
+		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
+			<provider copy-of="extension" id="org.eclipse.cdt.ui.UserLanguageSettingsProvider"/>
+			<provider-reference id="org.eclipse.cdt.core.ReferencedProjectsLanguageSettingsProvider" ref="shared-provider"/>
+			<provider-reference id="org.eclipse.cdt.managedbuilder.core.MBSLanguageSettingsProvider" ref="shared-provider"/>
+			<provider class="org.eclipse.cdt.managedbuilder.internal.language.settings.providers.GCCBuiltinSpecsDetectorMinGW" console="false" env-hash="766132112434618236" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetectorMinGW" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings MinGW" parameter="${COMMAND} ${FLAGS} -E -P -v -dD &quot;${INPUTS}&quot;" prefer-non-shared="true">
+				<language-scope id="org.eclipse.cdt.core.gcc"/>
+				<language-scope id="org.eclipse.cdt.core.g++"/>
+			</provider>
+		</extension>
+	</configuration>
+</project>
+
+/*
+ * Monsalbo.c
+ *
+ *  Created on: 6 jul. 2021
+ *      Author: Ususario
+ */
+
+#include "Monsalbo.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+void getInt (char* mensaje, int* entero)
+{
+    printf(mensaje);
+    scanf("%d", entero);
+}
+
+void getFloat (char* mensaje, float* flotante)
+{
+    printf(mensaje);
+    scanf("%f", flotante);
+}
+
+void getString(char* mensaje, char* cadena)
+{
+    printf(mensaje);
+    fflush(stdin);
+    gets(cadena);
+}
+
+void getChar (char* mensaje, char* caracter)
+{
+    printf(mensaje);
+    fflush(stdin);
+    scanf("%c",caracter);
+}
+
+int mostrarMenu(void)
+{
+	int menu;
+
+	printf("\n\n1. ALTA EMPLEADO\n"
+			"2. MODIFICAR EMPLEADO\n"
+			"3. DAR DE BAJA EMPLEADO\n"
+			"4. LISTAR EMPLEADOS\n"
+			"5. LISTAR EMPLEADOS ORDEANDOS POR APELLIDO Y SECTOR\n"
+			"6. SALARIOS: LISTAR, TOTAL, PROMEDIO, SUPERIORES AL SALARIO PROMEDIO\n"
+			"7. SALIR\n"
+			"\n Ingrese la opcion que desea realizar: ");
+	scanf("%d", &menu);
+
+	return menu;
+}
+
+/*
+ * Monsalbo.h
+ *
+ *  Created on: 6 jul. 2021
+ *      Author: Ususario
+ */
+
+#ifndef MONSALBO_H_
+#define MONSALBO_H_
+
+void getInt (char* mensaje, int* entero);
+
+void getFloat (char* mensaje, float* flotante);
+
+void getString (char* mensaje, char* cadena);
+
+void getChar (char* mensaje, char* caracter);
+
+int mostrarMenu(void);
+
+#endif /* MONSALBO_H_ */
+
+/*
+ ============================================================================
+ Name        : TP2__MonsalboLucio.c
+ Author      : Monsalbo Lucio
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "ArrayEmployees.h"
+#include "Monsalbo.h"
+
+#define TAM 1000
+
+int main(void)
+{
+	setbuf(stdout, NULL);
+	int menu;
+
+	//CREO ARRAY DE ESTRUCTURA
+	empleado list[TAM];
+
+	//INICIALIAZO ARRAY DE ESTRUCTURA
+	initempleados( list, TAM);
+
+
+	do
+	{
+		menu = mostrarMenu();
+
+		switch(menu)
+		{
+		case 1:
+			darDeAltaEmpleado(list, TAM);
+			break;
+
+		case 2:
+			modificarEmpleado(list , TAM);
+			break;
+
+		case 3:
+			removeempleado( list, TAM);
+			break;
+
+		case 4:
+			mostrarEmpleados(list,TAM);
+			break;
+
+		case 5:
+			ordenarEmpleados(list, TAM);
+			break;
+
+		case 6:
+			mostrarTotalYPromedioSalariosYEmpleadosSuperiorPromedio(list,TAM);
+			break;
+
+		case 7:
+			printf( "\n           GRACIAS POR UTILIZAR ESTE PROGRAMA\n"
+						"             PRODUCIDO POR Monsalbo lucio\n"
+						"              EDITADO POR Lucio Monsalbo\n"
+						"         BUILDEADO POR Alejandro Lucio Monsalbo\n"
+						"        TESTEADO POR Valerio Alejandro Monsalbo\n"
+						"        ENVIADO POR Monsalbo Lucio Alejandro Valerio\n"
+						"   AGRADECIMIENTO ESPECIAL A Lucio Alejandro Valerio Monsalbo\n");
+			break;
+		}
+	}while(menu != 7);
+
+
+	return EXIT_SUCCESS;
+}
+
+/*
+ * ArrayEmployees.c
+ *
+ *  Created on: 6 jul. 2021
+ *      Author: Ususario
+ */
+
+#include "ArrayEmployees.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "Monsalbo.h"
+
+#define OCUPADO 1
+#define LIBRE 0
+
+void darDeAltaEmpleado(empleado list[], int TAM)
+{
+	int validacion;
+	char nombre[51];
+	char apellido[51];
+	float salario;
+	int sector;
+	int id;
+	int libre;
+	char idStr[5];
+
+	libre = empleado_ObtenerLibre(list, TAM);
+	if(libre != -1)
+	{
+		cargarUltimoID ( "ultimoId.csv", idStr);
+
+		id = atoi(idStr);
+		id++;
+
+		guardarUltimoID("ultimoId.csv",id);
+
+		getString("ingresar nombre del empleado: ", nombre);
+		strlwr(nombre);
+		nombre[0] = toupper(nombre[0]);
+
+		getString("ingresar apellido del empleado: ", apellido);
+		strlwr(apellido);
+		apellido[0] = toupper(apellido[0]);
+
+		getFloat("ingresar salario del empleado: ", &salario);
+
+		getInt("ingrese sector del empleado: ", &sector);
+
+		validacion = addEmpleado(list, libre, id, nombre, apellido, salario, sector);
+
+		if(validacion != 0)
+		{
+			printf("\nERROR, no se pudo dar de alta correctamente  el empleado");
+		}else{
+			printf("\nse dio de alta correctamente el empleado");
+		}
+	}else{
+		printf("\nno se encontro lugar libre en el sistema");
+	}
+}
+
+int addEmpleado(empleado list[], int pos, int id, char nombre[], char apellido[],float salario, int sector)
+{
+	int retorno;
+	int validacion;
+
+	retorno = -1;
+
+	if(list != NULL && pos > -1 && id > 0 && nombre != NULL && apellido !=NULL && salario > 0 && sector > 0)
+	{
+		empleado auxiliar;
+
+		auxiliar.id = id;
+		strcpy(auxiliar.nombre, nombre);
+		strcpy(auxiliar.apellido, apellido);
+		auxiliar.salario = salario;
+		auxiliar.sector = sector;
+
+		do
+		{
+			printf("\nesta seguro que quiere dar de alta el empleado ingresado?\n"
+					"\n1- SI"
+					"\n2- NO"
+					"\ningrese opcion: ");
+			scanf("%d", &validacion);
+		}while(validacion != 1 && validacion != 2);
+
+		if(validacion == 1)
+		{
+			list[pos].id = auxiliar.id;
+			strcpy(list[pos].nombre, auxiliar.nombre);
+			strcpy(list[pos].apellido, auxiliar.apellido);
+			list[pos].salario = auxiliar.salario;
+			list[pos].sector = auxiliar.sector;
+			list[pos].isEmpty = OCUPADO;
+			retorno = 0;
+		}else{
+			printf("\noperacion cancelada");
+		}
+	}
+	return retorno;
+}
+
+int guardarUltimoID(char* path, int id)
+{
+	FILE* pFile;
+	int retorno=0;
+
+	pFile = fopen(path, "w");
+
+	if(pFile != NULL)
+	{
+		fprintf(pFile,"%d", id);
+		retorno=1;
+	}
+
+	fclose(pFile);
+
+	return retorno;
+}
+
+int cargarUltimoID (char* path, char* id)
+{
+	int retorno=0;
+	FILE* pFile;
+
+	pFile = fopen(path, "r");
+
+	if(pFile != NULL)
+	{
+		fscanf(pFile, "%s", id);
+		retorno=1;
+	}
+
+	fclose(pFile);
+
+	return retorno;
+}
+
+int empleado_ObtenerLibre(empleado array[], int TAM)
+{
+	int retorno = -1;
+	int i;
+
+	//SI EXISTE EL ARRAY Y EL LIMITE ES VALIDO
+	if (array != NULL && TAM > 0)
+	{
+		//RECORRO TODO EL ARRAY
+		for (i = 0; i < TAM; i++)
+		{
+			//PREGUNTO POR EL ESTADO "LIBRE"
+			if (array[i].isEmpty == 0)
+			{
+				//OBTENGO EL PRIMER INDEX DEL VECTOR "LIBRE" Y SALGO
+				retorno = i;
+				break;
+			}
+		}
+	}
+	return retorno;
+}
+
+int initempleados(empleado* list, int TAM)
+{
+	int i;
+	int retorno;
+
+	retorno = -1;
+
+	if (list != NULL && TAM > 0)
+	{
+		for (i = 0; i < TAM; i++)
+		{
+			list[i].isEmpty = 0;
+		}
+		retorno = 0;
+	}
+	return retorno;
+}
+
+void modificarEmpleado(empleado list[],int TAM)
+{
+	int pos;
+	int id;
+	int validacion;
+	char nombre[51];
+	char apellido[51];
+	float salario;
+	int sector;
+	int largo;
+
+	largo = empleado_len(list, TAM);
+	if(largo > 0)
+	{
+		getInt("\ningrese el id del empleado a modificar: ", &id);
+
+		pos = findempleadoById(list, TAM,  id);
+
+
+		if(pos != -1)
+		{
+			puts("\nempleado encontrado: ");
+	        puts("\nID ******** NOMBRE ******** APELLIDO ******** SALARIO ******** SECTOR");
+
+			mostrarUnEmpleado( list, pos);
+
+			strcpy(nombre,list[pos].nombre);
+			strcpy(apellido,list[pos].apellido);
+			salario = list[pos].salario;
+			sector = list[pos].sector;
+
+			getInt("\ndesea modificar el nombre del empleado?\n"
+					"\n1 PARA SI"
+					"\ncualquier otro numero para NO: ",&validacion);
+			if(validacion == 1)
+			{
+				getString("\ningrese el nuevo nombre: ", nombre);
+				strlwr(nombre);
+				nombre[0] = toupper(nombre[0]);
+			}
+
+
+			getInt("\ndesea modificar el apelldio del empleado?\n"
+					"\n1 PARA SI "
+					"\ncualquier otro numero para NO: ",&validacion);
+			if(validacion == 1)
+			{
+				getString("\ningrese el nuevo apelldio: ", apellido);
+				strlwr(apellido);
+				apellido[0] = toupper(apellido[0]);
+			}
+
+
+			getInt("\ndesea modificar el salario del empleado?\n"
+					"\n1 PARA SI "
+					"\ncualquier otro numero para NO: ",&validacion);
+			if(validacion == 1)
+			{
+				getFloat("\ningrese el nuevo salario: ", &salario);
+			}
+
+			getInt("\ndesea modificar el sector del empleado?\n"
+					"\n1 PARA SI"
+					"\ncualquier otro numero para NO: ",&validacion);
+			if(validacion == 1)
+			{
+				getInt("\ningrese el nuevo sector: ", &sector);
+			}
+
+			getInt("\nesta seguro que desea modificar el empleado?"
+					"\n1 PARA SI "
+					"\ncualquier otro numero para NO: ",&validacion);
+			if(validacion == 1)
+			{
+				validacion = agregarEmpleadoModificado(list,  pos, nombre, apellido, salario, sector);
+				if(validacion == 1)
+				{
+					puts("\nempleado modificado con exito");
+				}
+			}else{
+				puts("\nopereacion cancelada");
+			}
+		}else{
+			puts("\nno se encontro el empleado");
+		}
+	}else{
+		puts("\nno hay empleados cargados para modificar");
+	}
+}
+
+int findempleadoById(empleado list[], int TAM, int id)
+{
+	int retorno = -1;
+	int i;
+
+	//SI EXISTE EL ARRAY Y EL LIMITE ES VALIDO
+	if (list != NULL && TAM > 0)
+	{
+		//RECORRO TODO EL ARRAY
+		for (i = 0; i < TAM; i++)
+		{
+			//BUSCO QUE ESTE "OCUPADO" Y QUE CONCIDA EL ID QUE ESTOY BUSCANDO
+			if (list[i].id == id && list[i].isEmpty == OCUPADO)
+			{
+				//SI ENCONTRE EL ID
+				//DEVUELVO EL INDEX DE DONDE ESTA EL ID BUSCADO Y SALGO
+				retorno = i;
+				break;
+			}
+		}
+	}
+	return retorno;
+}
+
+int agregarEmpleadoModificado(empleado list[], int pos, char nombre[],char apellido[], float salario, int sector)
+{
+	int retorno;
+
+	retorno = -1;
+
+	if(list != NULL && pos> -1 && nombre != NULL && apellido != NULL && salario > 0 && sector > 0)
+	{
+		strcpy(list[pos].nombre,nombre);
+		strcpy(list[pos].apellido, apellido);
+		list[pos].sector = sector;
+		list[pos].salario = salario;
+		retorno = 1;
+	}
+	return retorno;
+}
+
+int empleado_len(empleado list[], int tam)
+{
+	int i;
+	int contador;
+
+	contador = 0;
+
+	for(i=0; i<tam; i++)
+	{
+		if(list[i].isEmpty == OCUPADO)
+		{
+			contador++;
+		}
+	}
+	return contador;
+}
+
+
+int mostrarEmpleados(empleado list[], int tam)
+{
+    int i;
+    int largo;
+    int retorno;
+
+    retorno = -1;
+
+    largo = empleado_len(list, tam);
+
+    if(largo > 0)
+    {
+        puts("\nEMPLEADOS: ");
+        puts("\nID ******** NOMBRE ******** APELLIDO ******** SALARIO ******** SECTOR");
+        for(i=0; i<tam; i++)
+        {
+            if(list[i].isEmpty == OCUPADO)
+            {
+                mostrarUnEmpleado(list, i);
+                retorno = 1;
+            }
+        }
+    }
+    else
+    {
+        puts("\nNo hay empleados cargados para mostrar.");
+        retorno = 0;
+    }
+
+    return retorno;
+}
+
+void mostrarUnEmpleado(empleado list[], int pos)
+{
+    printf("\n%d %16s %17s %16.2f %15d", list[pos].id,
+    		list[pos].nombre,
+			list[pos].apellido,
+			list[pos].salario,
+			list[pos].sector);
+}
+
+void removeempleado(empleado list[],int TAM)
+{
+	int pos;
+	int id;
+	int validacion;
+	int largo;
+
+	largo = empleado_len(list, TAM);
+	if(largo > 0)
+	{
+		getInt("\ningrese el id del empleado a borrar: ", &id);
+
+		pos = findempleadoById(list, TAM,  id);
+
+
+		if(pos != -1)
+		{
+			puts("\nempleado encontrado: ");
+	        puts("\nID ******** NOMBRE ******** APELLIDO ******** SALARIO ******** SECTOR");
+
+			mostrarUnEmpleado( list, pos);
+
+			getInt("\nesta seguro que desea dar de baja el empleado?"
+					"\n1 PARA SI "
+					"\ncualquier otro numero para NO: ",&validacion);
+			if(validacion == 1)
+			{
+				list[pos].isEmpty = LIBRE;
+				puts("\nempleado borrado con exito");
+			}else{
+				puts("\nopereacion cancelada");
+			}
+		}else{
+			puts("\nno se encontro el empleado");
+		}
+	}else{
+		puts("\nno hay empleados cargados para borrar");
+	}
+}
+
+int ordenarEmpleados(empleado list[], int tam)
+{
+    int orden;
+    int opcion;
+    int retorno;
+    int largo;
+
+    retorno = -1;
+
+    largo = empleado_len(list, tam);
+
+    if(largo > 0)
+    {
+        getInt("\nComo desea ordenar la lista de empleados?"
+               "\n1. Por apellido."
+               "\n2. Por sector."
+               "\nIngrese la opcion que desea realizar: ", &opcion);
+
+        while(opcion > 2 || opcion < 1)
+        {
+            getInt("\nERROR: Opcion incorrecta"
+                   "\nIngrese nuevamente como desea ordenar la lista de empleados?"
+                   "\n1. Por apellido."
+                   "\n2. Por sector."
+                   "\nIngrese la opcion que desea realizar: ", &opcion);
+        }
+
+        switch(opcion)
+        {
+        case 1:
+            getInt("\nIngrese el criterio con el que desea ordenar la lista."
+                   "\n'1' para ascendente o '0' para descendente: "
+                   "\nIngrese la opcion que desea realizar: ", &orden);
+            while(orden > 1 || orden < 0)
+            {
+                getInt("\nERROR: El numero ingresado no es correcto, intente nuevamente."
+                       "\n'1' para ascendente o '0' para descendente: "
+                       "\nIngrese la opcion que desea realizar: ", &orden);
+            }
+            ordenarEmpleadosPorApellido(list, tam, orden);
+            mostrarEmpleados(list, tam);
+            retorno = 1;
+            break;
+        case 2:
+            getInt("\nIngrese el criterio con el que desea ordenar la lista."
+                   "\n'1' para ascendente o '0' para descendente: "
+                   "\nIngrese la opcion que desea realizar: ", &orden);
+            while(orden > 1 || orden < 0)
+            {
+                getInt("\nERROR: El numero ingresado no es correcto, intente nuevamente."
+                       "\n'1' para ascendente o '0' para descendente: "
+                       "\nIngrese la opcion que desea realizar: ", &orden);
+            }
+            ordenarEmpleadosPorSector(list, tam, orden);
+            mostrarEmpleados(list, tam);
+            retorno = 1;
+            break;
+        }
+    }
+    else
+    {
+        puts("\nERROR: No hay empleados cargados para mostrar la lista ordenada.");
+    }
+
+    return retorno;
+}
+
+int ordenarEmpleadosPorApellido(empleado list[], int tam, int orden)
+{
+    int i;
+    int j;
+    int retornoCmp;
+    int retorno;
+    empleado aux;
+
+    retorno = -1;
+
+    if(orden == 1)
+    {
+        for(i=0; i<tam-1; i++)
+        {
+            for(j=i+1; j<tam; j++)
+            {
+                retornoCmp = strcmp(list[i].apellido, list[j].apellido);
+                if(retornoCmp == 1)
+                {
+                    aux = list[i];
+                    list[i] = list[j];
+                    list[j] = aux;
+                    retorno = 1;
+                }
+            }
+        }
+    }
+    else
+    {
+        for(i=0; i<tam-1; i++)
+        {
+            for(j=i+1; j<tam; j++)
+            {
+                retornoCmp = strcmp(list[i].apellido, list[j].apellido);
+                if(retornoCmp == -1)
+                {
+                    aux = list[j];
+                    list[j] = list[i];
+                    list[i] = aux;
+                    retorno = 1;
+                }
+            }
+        }
+    }
+
+    return retorno;
+}
+
+int ordenarEmpleadosPorSector(empleado list[], int tam, int orden)
+{
+  int i;
+  int j;
+  int retorno;
+  empleado aux;
+
+  retorno = -1;
+    if(orden == 1)
+    {
+        for(i=0; i<tam-1; i++)
+        {
+            for(j=i+1; j<tam; j++)
+            {
+                if(list[i].sector > list[j].sector)
+                {
+                    aux = list[i];
+                    list[i] = list[j];
+                    list[j] = aux;
+                    retorno = 1;
+                }
+            }
+        }
+    }
+    else
+    {
+        for(i=0; i<tam-1; i++)
+        {
+            for(j=i+1; j<tam; j++)
+            {
+                if(list[i].sector < list[j].sector)
+                {
+                    aux = list[j];
+                    list[j] = list[i];
+                    list[i] = aux;
+                    retorno = 1;
+                }
+            }
+        }
+    }
+
+    return retorno;
+}
+
+void mostrarTotalYPromedioSalariosYEmpleadosSuperiorPromedio(empleado list[], int tam)
+{
+    int i;
+    int contadorSalarios;
+    float sumaSalarios;
+    float promedioSalarios;
+    int empleadosSuperiorPromedio;
+    int largo;
+
+    contadorSalarios = 0;
+    promedioSalarios = 0;
+    sumaSalarios = 0;
+
+    largo = empleado_len(list, tam);
+
+    if(largo > 0)
+    {
+        for(i=0; i<tam; i++)
+        {
+            if(list[i].isEmpty == OCUPADO)
+            {
+                sumaSalarios = sumaSalarios + list[i].salario;
+                contadorSalarios++;
+            }
+        }
+
+        promedioSalarios = sumaSalarios / contadorSalarios;
+
+        empleadosSuperiorPromedio = empleadosSuperanSalarioPromedio(list,  tam, promedioSalarios);
+
+        puts("\nEmpleados cargados hasta el momento: ");
+        mostrarEmpleados(list, tam);
+
+        printf("\nEl total de los salarios es: %.2f", sumaSalarios);
+        printf("\nEl promedio de los salarios es: %.2f", promedioSalarios);
+        printf("\nLa cantidad de empleados que superan el salario promedio es: %d", empleadosSuperiorPromedio);
+
+    }
+    else
+    {
+        puts("\nNo hay empleados cargados para mostrar el promedio de salarios, total de salarios y la cantidad de empleados que lo superan.");
+    }
+}
+
+int empleadosSuperanSalarioPromedio(empleado list[], int tam, float salarioPromedio)
+{
+    int i;
+    int empleadosSuperiorPromedio;
+
+    empleadosSuperiorPromedio = 0;
+
+    for(i=0; i<tam; i++)
+    {
+        if(list[i].isEmpty == OCUPADO)
+        {
+            if(list[i].salario > salarioPromedio)
+            {
+                empleadosSuperiorPromedio++;
+            }
+        }
+    }
+
+    return empleadosSuperiorPromedio;
+}
+
+/*
+ * ArrayEmployees.h
+ *
+ *  Created on: 6 jul. 2021
+ *      Author: Ususario
+ */
+
+#ifndef arrayemployees_H_
+#define arrayemployees_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct
+{
+	int    id;
+	char   nombre[51];
+	char   apellido[51];
+	float  salario;
+	int    sector;
+	int    isEmpty;
+}empleado;
+
+int guardarUltimoID(char* path, int id);
+
+int cargarUltimoID (char* path, char* id);
+
+
+/**
+ * @fn int darDeAltaEmpleado(empleado, int)
+ * @brief
+ *
+ * @param list
+ * @param TAM
+ * @return
+ */
+void darDeAltaEmpleado(empleado list[], int TAM);
+
+/**
+ * @fn int pedirEmpleado(int, char[], char[], float*, int*)
+ * @brief
+ *
+ * @param id
+ * @param nombre
+ * @param apellido
+ * @param salario
+ * @param sector
+ * @return
+ */
+int pedirEmpleado(char nombre[], char apellido[],float *salario, int *sector);
+
+/**
+ * @fn void eGen_ObtenerID(int*)
+ * @brief
+ *
+ * @param Gen_idIncremental
+ */
+void eGen_ObtenerID(int* Gen_idIncremental);
+
+/**
+ * @fn empleado modificarEmpleado(empleado*, int)
+ * @brief
+ *
+ * @param list
+ * @param TAM
+ * @return
+ */
+void modificarEmpleado(empleado list[],int TAM);
+
+
+/**
+ * @fn int menu(void)
+ * @brief muestra el menu y recibe la respuesta del usuario
+ *
+ * @return retorna el numero de opcion ingresado por el usuario
+ */
+int mostrarMenu(void);
+
+/**
+ * @fn int darDeBajaEmpleado(empleado, int)
+ * @brief
+ *
+ * @param list
+ * @param TAM
+ * @return
+ */
+int darDeBajaEmpleado(empleado list,int TAM);
+
+/**
+ * @fn int empleado_ObtenerLibre(empleado, int)
+ * @brief
+ *
+ * @param array
+ * @param TAM
+ * @return
+ */
+int empleado_ObtenerLibre(empleado array[], int TAM);
+
+/**
+ * @fn void ordenPorSalario(empleado, int)
+ * @brief
+ *
+ * @param array
+ * @param TAM
+ * @return
+ */
+void ordenPorSalario(empleado list, int TAM);
+
+
+/*......................................................................................................*/
+
+/**
+ * @fn int initempleados(empleado*, int)
+ * @brief para indicar todas las posiciones del array que estan vacias,bandera(isEmpty) a TRUE
+ *
+ * @param list empleado* puntero hacia el array de empleados
+ * @param TAM
+ * @return (-1) en caso de error(longitud inv�lida o puntero nulo) - (0) todo ok
+ */
+int initempleados(empleado *list, int TAM);
+
+/*......................................................................................................*/
+
+/**
+ * @fn int addempleado(empleado*, int, int, char[], char)
+ * @brief Agrega en un array de empleados existente los valores recibidos como par�metro en la primer
+ * posici�n libre.
+ *
+ * @param list      empleado*
+ * @param pos   int
+ * @param id        int
+ * @param nombre[]    char
+ * @param apellido[] char
+ * @param salario    float
+ * @param sector    int
+ * @return retorna (-1) [Longitud no v�lida o puntero NULL o sin espacio libre] (0) todo ok
+ */
+
+int addEmpleado(empleado list[], int pos, int id, char nombre[], char apellido[], float salario, int sector);
+
+/*......................................................................................................*/
+
+/**
+ * @fn int findempleadoById(empleado, int, int)
+ * @brief Busca un empleado recibiendo como par�metro de b�squeda su Id.
+ *
+ * @param list empleado*
+ * @param TAM int
+ * @param id int
+ * @return retorna el empleado index con la posicion o (-1) [Longitud no v�lida o NULL
+ * puntero recibido o empleado no encontrado]
+ */
+int findempleadoById(empleado list[], int TAM, int id);
+
+/*......................................................................................................*/
+
+/**
+ * @fn int removeempleado(empleado*, int, int)
+ * @brief Elimina de manera l�gica (isEmpty Flag en 1) un empleado recibiendo como par�metro su Id.
+ *
+ * @param list empleado*
+ * @param TAM int
+ * @param id int
+ * @return retorna un int (-1) si Error [Longitud no v�lida o puntero NULO o si no puede
+ * encontrar un empleado] - (0) si est� bien
+ */
+void removeempleado(empleado list[],int TAM);
+
+/*......................................................................................................*/
+
+/**
+ * @fn int sortempleados(empleado*, int, int)
+ * @brief Ordena el array de empleados por apellido y sector de manera ascendente o descendente.
+ *
+ * @param list empleado*
+ * @param TAM int
+ * @param ordenar int [1] indica ARRIBA - [0] indica ABAJO
+ * @return  int Devuelve (-1) si hay error [longitud no v�lida o puntero NULO] - (0) si est� bien
+ */
+int sortEmpleados(empleado* list, int TAM, int ordenar);
+
+/*......................................................................................................*/
+
+/**
+ * @fn int printEmpleados(empleado*, int)
+ * @brief Imprime el array de empleados de forma encolumnada
+ *
+ * @param list empleado*
+ * @param TAM int
+ * @return int
+ */
+int printEmpleados(empleado* list, int TAM);
+
+/*......................................................................................................*/
+/**
+ * @fn int agregarEmpleadoModificado(empleado[], int, char[], char[], float, int)
+ * @brief
+ *
+ * @param list
+ * @param pos
+ * @param nombre
+ * @param apellido
+ * @param salario
+ * @param sector
+ */
+int agregarEmpleadoModificado(empleado list[], int pos, char nombre[],char apellido[], float salario, int sector);
+
+int empleado_len(empleado list[], int tam);
+
+int mostrarEmpleados(empleado list[], int tam);
+
+void mostrarUnEmpleado(empleado list[], int pos);
+
+int ordenarEmpleados(empleado list[], int tam);
+
+int ordenarEmpleadosPorApellido(empleado list[], int tam, int orden);
+
+int ordenarEmpleadosPorSector(empleado list[], int tam, int orden);
+
+void mostrarTotalYPromedioSalariosYEmpleadosSuperiorPromedio(empleado list[], int tam);
+
+int empleadosSuperanSalarioPromedio(empleado list[], int tam, float salarioPromedio);
+
+
+#endif /* arrayemployees_H_ */
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>TP2__MonsalboLucio</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+	</natures>
+</projectDescription>
+
+0
+
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.848330291">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.848330291" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.PE64" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.debug.848330291" name="Debug" parent="cdt.managedbuild.config.gnu.mingw.exe.debug">
+					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.848330291." name="/" resourcePath="">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.debug.1093058461" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.debug">
+							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.debug.506097208" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.debug"/>
+							<builder buildPath="${workspace_loc:/TP2__MonsalboLucio}/Debug" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1888765340" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.66290652" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.48439947" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.387915876" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.2006715908" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug">
+								<option id="gnu.cpp.compiler.mingw.exe.debug.option.optimization.level.1140101886" name="Optimization Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.max" id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.1302079281" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.719155534" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug">
+								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.mingw.exe.debug.option.optimization.level.1654971503" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.debug.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.max" id="gnu.c.compiler.mingw.exe.debug.option.debugging.level.482613067" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.296459997" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.547732757" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug">
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.935131561" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.1035135966" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.1381227836">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.1381227836" moduleId="org.eclipse.cdt.core.settings" name="Release">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.PE64" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.1381227836" name="Release" parent="cdt.managedbuild.config.gnu.mingw.exe.release">
+					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.1381227836." name="/" resourcePath="">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1730215629" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
+							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1311042145" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
+							<builder buildPath="${workspace_loc:/TP2__MonsalboLucio}/Release" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1798170" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.release.789354154" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.release">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.2034616380" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.1321238120" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.release.1216277578" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.release">
+								<option id="gnu.cpp.compiler.mingw.exe.release.option.optimization.level.807104485" name="Optimization Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.mingw.exe.release.option.debugging.level.45929351" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.971201156" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release">
+								<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.mingw.exe.release.option.optimization.level.931146882" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.release.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.mingw.exe.release.option.debugging.level.832895140" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.release.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1653417343" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.1990473153" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release">
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.585006669" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.1768369140" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="TP2__MonsalboLucio.cdt.managedbuild.target.gnu.mingw.exe.631898497" name="Executable" projectType="cdt.managedbuild.target.gnu.mingw.exe"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.1381227836;cdt.managedbuild.config.gnu.mingw.exe.release.1381227836.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.971201156;cdt.managedbuild.tool.gnu.c.compiler.input.1653417343">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.848330291;cdt.managedbuild.config.gnu.mingw.exe.debug.848330291.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.719155534;cdt.managedbuild.tool.gnu.c.compiler.input.296459997">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+</cproject>
